@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="br.go.cdg.textgame.MainActivity"
+    android:weightSum="12">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:backgroundTint="@color/backgroundButtonStart"
+        android:textColor="@color/letterButtonStart"
+        android:text="Jogar"
+        android:textSize="@dimen/buttonStartFontSize"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="11"
+        android:backgroundTint="@color/backgroundButtonExit"
+        android:textColor="@color/letterButtonExit"
+        android:text="Sair"
+        android:textSize="@dimen/buttonExitFontSize" />
+
+</LinearLayout>

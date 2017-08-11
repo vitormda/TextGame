@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="C:\Users\vitor.almeida\.android\build-cache\accf6e100181939f0bbeedfe14a86609f99adb63\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="F:\Desenvolvimento\Android\projects\TextGame\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_eda06bb9ae46d8c4ec4b71e2406427b20d34b3ac\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="F:\Desenvolvimento\Android\projects\TextGame\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="0765a457647605b2e00b8de98debac70ed0b425e">
+        <dex dex="F:\Desenvolvimento\Android\projects\TextGame\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_5abc35e3d28162ed19b324144b101a1f94119da8\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\vitor.almeida\.android\build-cache\93edc4807a2df3d5d60079b93e9161ef0651cb69\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="fcd01fd11233459f546c437ec927e9b61bf7caf1">
+        <dex dex="F:\Desenvolvimento\Android\projects\TextGame\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_22376790d5cc4d690503de3e054d82aa7823a96c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\vitor.almeida\Documents\AndroidSDK\extras\m2repository\com\android\support\constraint\constraint-layout-solver\1.0.2\constraint-layout-solver-1.0.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="b9cd8fc6bd15cb915735d34535db30ece0c44603">
+        <dex dex="F:\Desenvolvimento\Android\projects\TextGame\app\build\intermediates\transforms\dex\debug\folders\1000\10\constraint-layout-solver-1.0.2_c8c1226f693641bd47156e4083f4477eff6a27ed\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\vitor.almeida\.android\build-cache\2bcb0af2e6e3fd0b78ce67f6cbd6252bbd24722a\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="88246166d5afb106f532f6e6deae683c66b42c89">
+        <dex dex="F:\Desenvolvimento\Android\projects\TextGame\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_6f34e3f825e1ab282e16489ad174dfa283f1265c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\vitor.almeida\.android\build-cache\787c46ee8116493bfe12d9e060e598056275fc21\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="2e92aa0163544a804a0b34f169ca61801770839a">
+        <dex dex="F:\Desenvolvimento\Android\projects\TextGame\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_26209d8f74b41bbf05120236b56191a7818a1052\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\vitor.almeida\.android\build-cache\659f4bf0ef0f1fce67756440c3a61436ec59ec24\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="952944218ecedea1554a513dec0c14d570642843">
+        <dex dex="F:\Desenvolvimento\Android\projects\TextGame\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_cb64f9562b34dad193263487c80e90096df0719c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\vitor.almeida\.android\build-cache\2867f31262697ad69e49125d4259ad8eb22dc69c\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="18d31838aa4fcc768a8a0516e22cc13b94655d89">
+        <dex dex="F:\Desenvolvimento\Android\projects\TextGame\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_41cc218a4ab895f7af7d75f6653afb4c478decc7\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\vitor.almeida\.android\build-cache\a6458cccf4753d532f13c855b964fafbe9837f5a\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="44ee06abb66da30f5855e6bf54574e64cdcd982a">
+        <dex dex="F:\Desenvolvimento\Android\projects\TextGame\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_2bffae047186e596fdc2899d66e11c0301670e53\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\vitor.almeida\.android\build-cache\8186560edefb20e70256f4f520d500233cb6f102\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="9935891f23923f39d002087085d9696568a9f657">
+        <dex dex="F:\Desenvolvimento\Android\projects\TextGame\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_51ac50e4ef0ba0cbc3d9a0ccf369125bdafc0dec\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\vitor.almeida\.android\build-cache\327a6ddbc49cb24b652254a5c0c44564848532b3\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="47471eb19df288158b00b8d9cfa41bce7373f5cc">
+        <dex dex="F:\Desenvolvimento\Android\projects\TextGame\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_df9ee1b7b7e11f876ffec8e18902e1966ae5c570\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="F:\Desenvolvimento\Android\projects\TextGame\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="F:\Desenvolvimento\Android\projects\TextGame\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_4e28a2b4eebaa4a10793ea540a8cc1eaf9040f18\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\vitor.almeida\Documents\AndroidSDK\extras\android\m2repository\com\android\support\support-annotations\26.0.0-alpha1\support-annotations-26.0.0-alpha1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="023ee503b631f69511e335a061ea008f8da60f40">
+        <dex dex="F:\Desenvolvimento\Android\projects\TextGame\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-26.0.0-alpha1_7b78f876a77ec302f4f5630dce768a52f7adcd8b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\vitor.almeida\.android\build-cache\279f1224cefc78a03162dcb829cfdeee01b28041\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="8df0e365e40beb151bc42dee20817721a6cab7b0">
+        <dex dex="F:\Desenvolvimento\Android\projects\TextGame\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_e9f88a202aae25f8d9d1cccb13728524f895f2dd\classes.dex" />
+    </item>
+
+</items>
