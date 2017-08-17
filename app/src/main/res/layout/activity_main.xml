@@ -8,21 +8,8 @@
     tools:context="br.go.cdg.textgame.MainActivity"
     android:weightSum="12">
 
-    <Button
+    <ListView
+        android:id="@+id/storyList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:backgroundTint="@color/backgroundButtonStart"
-        android:textColor="@color/letterButtonStart"
-        android:text="Jogar"
-        android:textSize="@dimen/buttonStartFontSize"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="11"
-        android:backgroundTint="@color/backgroundButtonExit"
-        android:textColor="@color/letterButtonExit"
-        android:text="Sair"
-        android:textSize="@dimen/buttonExitFontSize" />
-
+        android:layout_height="match_parent" />
 </LinearLayout>

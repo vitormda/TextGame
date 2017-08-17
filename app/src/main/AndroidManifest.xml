@@ -20,9 +20,8 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:theme="@style/AppTheme">
-
-        </activity>
+            android:theme="@style/AppTheme"></activity>
+        <activity android:name=".story.StoryActivity"></activity>
     </application>
 
 </manifest>
