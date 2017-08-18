@@ -3,7 +3,10 @@ package br.go.cdg.textgame.story;
 import android.content.res.AssetManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import org.jsoup.Jsoup;
@@ -22,9 +25,12 @@ import java.util.ArrayList;
 
 import br.go.cdg.textgame.R;
 
-public class StoryActivity extends AppCompatActivity {
+public class StoryActivity extends AppCompatActivity implements View.OnClickListener {
 
-    ArrayList<Passage> story = new ArrayList<Passage>();
+    private ArrayList<Passage> story = new ArrayList<Passage>();
+    private ArrayList<Passage> storySoFar = new ArrayList<Passage>();
+
+    private PassageAdapter passageAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,10 +68,35 @@ public class StoryActivity extends AppCompatActivity {
                 Elements htmlPassageData = htmlStory.getElementsByTag("tw-passagedata");
 
                 for (Element passageDataElement : htmlPassageData) {
-                    story.add(new Passage(passageDataElement));
+                    Passage passage = new Passage(passageDataElement);
+                    story.add(passage);
+
+                    if(passage.getId() == 0) {
+                        storySoFar.add(passage);
+                    }
                 }
             }
         }
+
+        RecyclerView rv = (RecyclerView) findViewById(R.id.storyRecycler);
+
+        rv.hasFixedSize();
+        rv.setLayoutManager(new LinearLayoutManager(this));
+
+        passageAdapter = new PassageAdapter(storySoFar, this);
+        rv.setAdapter(passageAdapter);
+    }
+
+    @Override
+    public void onClick(View view) {
+        int id = ((Integer)view.getTag()).intValue();
+        Log.i("OPÇÃO ESCOLHIDA",String.valueOf(id));
+
+        /*for (int i = 0; i < story.size(); i++) {
+            if (story.get(i).getId() == id) {
+                passageAdapter.addPassage(story.get(i));
+            }
+        }*/
     }
 
     public static String StreamToString(InputStream in) throws IOException {
