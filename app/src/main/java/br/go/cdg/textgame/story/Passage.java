@@ -1,7 +1,5 @@
 package br.go.cdg.textgame.story;
 
-import android.util.Log;
-
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
@@ -15,16 +13,17 @@ public class Passage {
     private String name;
     private int id;
     private String text;
+    private boolean current = true;
 
     private ArrayList<Link> links = new ArrayList<Link>();
+
+    public Passage(){}
 
     public Passage(Element e) {
         this.name = e.attr("tags").replace('-', ' ');
         this.id = Integer.parseInt(e.attr("name"));
 
         this.text = e.text();
-
-        Log.i("numero de linhas", String.valueOf(text.split("\\n").length));
 
         Elements rawLinks = e.getElementsByTag("link");
 
@@ -63,5 +62,13 @@ public class Passage {
 
     public void setLinks(ArrayList<Link> links) {
         this.links = links;
+    }
+
+    public boolean isCurrent() {
+        return current;
+    }
+
+    public void setCurrent(boolean current) {
+        this.current = current;
     }
 }

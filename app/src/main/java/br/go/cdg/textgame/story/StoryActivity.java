@@ -7,6 +7,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import org.jsoup.Jsoup;
@@ -78,6 +80,10 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
             }
         }
 
+        Log.i("NUM", String.valueOf(storySoFar.size()));
+
+        this.setTitle(storyName);
+
         RecyclerView rv = (RecyclerView) findViewById(R.id.storyRecycler);
 
         rv.hasFixedSize();
@@ -89,14 +95,48 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View view) {
-        int id = ((Integer)view.getTag()).intValue();
-        Log.i("OPÇÃO ESCOLHIDA",String.valueOf(id));
 
-        /*for (int i = 0; i < story.size(); i++) {
+        Button clicked = (Button) view;
+
+        int id = ((Integer)view.getTag()).intValue();
+
+        clicked.setTextColor(getColor(android.R.color.holo_red_dark));
+        clicked.setBackgroundColor(getColor(R.color.cardBackground));
+
+        LinearLayout buttonLayout = (LinearLayout)clicked.getParent();
+
+        for(int i = 0; i < buttonLayout.getChildCount(); i++) {
+            ((Button) buttonLayout.getChildAt(i)).setClickable(false);
+        }
+
+        for (int i = 0; i < story.size(); i++) {
             if (story.get(i).getId() == id) {
-                passageAdapter.addPassage(story.get(i));
+                passageAdapter.addPassage(clone(story.get(i)), id);
+                break;
             }
-        }*/
+        }
+    }
+
+    public Passage clone(Passage passage) {
+        Passage cloned = new Passage();
+
+        cloned.setId(passage.getId());
+        cloned.setName(passage.getName());
+        cloned.setText(passage.getText());
+
+        ArrayList<Link> links = new ArrayList<Link>();
+        for (Link ink : passage.getLinks()) {
+            Link newLink = new Link();
+
+            newLink.setId(ink.getId());
+            newLink.setText(ink.getText());
+
+            links.add(newLink);
+        }
+
+        cloned.setLinks(links);
+
+        return cloned;
     }
 
     public static String StreamToString(InputStream in) throws IOException {
