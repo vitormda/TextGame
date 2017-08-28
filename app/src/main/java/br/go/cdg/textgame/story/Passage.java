@@ -1,34 +1,50 @@
 package br.go.cdg.textgame.story;
 
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
+
+import org.json.JSONException;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
 
+
+
 /**
- * Created by vitor.almeida on 17/08/2017.
+ * @author vitor.almeida
  */
 
 public class Passage {
-    private String name;
-    private int id;
-    private String text;
-    private boolean current = true;
+    private String name = "";
+    private int id = 0;
+    private boolean current = false;
 
+    private ArrayList<String> text = new ArrayList<String>();
     private ArrayList<Link> links = new ArrayList<Link>();
 
     public Passage(){}
 
-    public Passage(Element e) {
-        this.name = e.attr("tags").replace('-', ' ');
-        this.id = Integer.parseInt(e.attr("name"));
+    public Passage(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
-        this.text = e.text();
+    public Passage(JSONObject jsonPassage) throws JSONException {
+        this.id = ((Long)jsonPassage.get("id")).intValue();
+        this.name = (String)jsonPassage.get("name");
+        this.current = (boolean)jsonPassage.get("current");
 
-        Elements rawLinks = e.getElementsByTag("link");
+        JSONArray jsonTexts = (JSONArray) jsonPassage.get("fragments");
+        for (int i = 0; i < jsonTexts.size(); i++) {
+            Object jsonText = jsonTexts.get(i);
 
-        for(Element rawLink : rawLinks) {
-            links.add(new Link(rawLink));
+            this.text.add((String) jsonText);
+        }
+
+        JSONArray jsonLinks = (JSONArray) jsonPassage.get("links");
+        for (int i = 0; i < jsonLinks.size(); i++) {
+            Object jsonLink = jsonLinks.get(i);
+
+            this.links.add(new Link((JSONObject) jsonLink));
         }
     }
 
@@ -48,11 +64,11 @@ public class Passage {
         this.id = id;
     }
 
-    public String getText() {
+    public ArrayList<String> getText() {
         return text;
     }
 
-    public void setText(String text) {
+    public void setText(ArrayList<String> text) {
         this.text = text;
     }
 
@@ -70,5 +86,38 @@ public class Passage {
 
     public void setCurrent(boolean current) {
         this.current = current;
+    }
+
+    public String getJson() {
+        String passage = "{ \"name\": \""+ name +"\", \"id\": "+ id +", \"fragments\": [";
+
+        for (int i = 0; i < text.size(); i++) {
+            passage = passage.concat("\""+text.get(i)+"\"");
+
+            if (i != text.size() - 1) {
+                passage = passage.concat(", ");
+            }
+        }
+
+        passage = passage.concat("], \"links\": [");
+
+        for (int i = 0; i < links.size(); i++) {
+            passage = passage.concat(links.get(i).toString());
+
+            if (i != links.size() - 1) {
+                passage = passage.concat(", ");
+            }
+        }
+
+        passage = passage.concat("], \"current\": "+current);
+
+        passage = passage.concat("}");
+
+        return passage;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(id).concat(" - ").concat(name);
     }
 }

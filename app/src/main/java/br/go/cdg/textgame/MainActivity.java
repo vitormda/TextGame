@@ -27,8 +27,6 @@ public class MainActivity extends AppCompatActivity {
 
         ListView storyList = (ListView) findViewById(R.id.storyList);
 
-        //String[] stories = new String[0];
-
         try {
             AssetManager am = getAssets();
 

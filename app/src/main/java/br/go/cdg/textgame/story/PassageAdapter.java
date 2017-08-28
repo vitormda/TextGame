@@ -1,8 +1,10 @@
+
 package br.go.cdg.textgame.story;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,13 +27,13 @@ public class PassageAdapter extends RecyclerView.Adapter<PassageAdapter.PassageH
 
     public static class PassageHolder extends RecyclerView.ViewHolder {
 
-        TextView passageText;
+        LinearLayout llTexts;
         LinearLayout llOptions;
 
         public PassageHolder(View cv) {
             super(cv);
 
-            passageText = (TextView) cv.findViewById(R.id.passageText);
+            llTexts = (LinearLayout) cv.findViewById(R.id.passageTexts);
             llOptions = (LinearLayout) cv.findViewById(R.id.passageHooks);
         }
     }
@@ -53,7 +55,26 @@ public class PassageAdapter extends RecyclerView.Adapter<PassageAdapter.PassageH
 
     @Override
     public void onBindViewHolder(PassageHolder passageHolder, int i) {
-        passageHolder.passageText.setText(Html.fromHtml(storySoFar.get(i).getText()));
+
+        passageHolder.itemView.setId(i);
+
+        Log.i("AQUI", "POSITION -> "+String.valueOf(i));
+        Log.i("AQUI", "CURRENT -> "+storySoFar.get(i).isCurrent());
+
+        passageHolder.llTexts.removeAllViews();
+
+        for (String text : storySoFar.get(i).getText()) {
+            TextView tv = new TextView(passageHolder.itemView.getContext());
+            tv.setText(text);
+            tv.setPadding(0, 5, 0, 5);
+
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            tv.setLayoutParams(params);
+
+            tv.setTextColor(storyContext.getColor(R.color.cardText));
+
+            passageHolder.llTexts.addView(tv);
+        }
 
         passageHolder.llOptions.removeAllViews();
 
@@ -73,9 +94,9 @@ public class PassageAdapter extends RecyclerView.Adapter<PassageAdapter.PassageH
                 hook.setBackgroundColor(storyContext.getColor(R.color.cardBackground));
             }
 
-            hook.setClickable(storySoFar.get(i).isCurrent());
-
-            hook.setOnClickListener((StoryActivity)storyContext);
+            if(storySoFar.get(i).isCurrent()) {
+                hook.setOnClickListener((StoryActivity) storyContext);
+            }
             passageHolder.llOptions.addView(hook);
         }
     }
@@ -85,22 +106,7 @@ public class PassageAdapter extends RecyclerView.Adapter<PassageAdapter.PassageH
         return storySoFar.size();
     }
 
-    public void addPassage(Passage passage, int id) {
-        for (Passage pass : storySoFar) {
-            if (pass.isCurrent()) {
-                pass.setCurrent(false);
-
-                for (Link link : pass.getLinks()) {
-                    if (link.getId() == id) {
-                        link.setClicked(true);
-                    }
-                }
-            }
-        }
-
-        storySoFar.add(passage);
-        notifyItemInserted(storySoFar.indexOf(passage));
+    public void updateStory(ArrayList<Passage> storySoFar) {
+        this.storySoFar = storySoFar;
     }
-
-
 }

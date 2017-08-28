@@ -15,11 +15,13 @@
         android:background="@color/cardBackground"
         android:padding="15dp">
 
-        <TextView
-            android:id="@+id/passageText"
+        <LinearLayout
+            android:id="@+id/passageTexts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/cardText"/>
+            android:orientation="vertical"
+            android:gravity="top">
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/passageHooks"

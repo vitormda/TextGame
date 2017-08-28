@@ -1,11 +1,13 @@
 package br.go.cdg.textgame.story;
 
-import org.jsoup.nodes.Element;
+
+import org.json.JSONException;
+import org.json.simple.JSONObject;
+
 
 /**
- * Created by vitor.almeida on 17/08/2017.
+ * @author vitor.almeida
  */
-
 public class Link {
     private int id;
     private String text;
@@ -13,11 +15,10 @@ public class Link {
 
     public Link(){}
 
-    public Link(Element e) {
-        String[] values = e.attr("text").split("\\|");
-
-        this.text = values[0];
-        this.id = Integer.parseInt(values[1]);
+    public Link(JSONObject jsonLink) throws JSONException {
+        this.id = ((Long)jsonLink.get("id")).intValue();
+        this.text = (String)jsonLink.get("text");
+        this.clicked = (boolean)jsonLink.get("clicked");
     }
 
     public int getId() {
@@ -42,5 +43,10 @@ public class Link {
 
     public void setClicked(boolean clicked) {
         this.clicked = clicked;
+    }
+
+    @Override
+    public String toString() {
+        return "{\"id\": "+id+", \"text\": \""+text+"\", \"clicked\": false}";
     }
 }

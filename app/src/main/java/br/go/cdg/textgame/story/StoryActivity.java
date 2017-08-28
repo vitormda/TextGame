@@ -3,6 +3,7 @@ package br.go.cdg.textgame.story;
 import android.content.res.AssetManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,18 +12,26 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 import br.go.cdg.textgame.R;
@@ -40,47 +49,29 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_story);
 
         String storyName = getIntent().getStringExtra("historia");
-        String fileName = storyName.concat(".html");
-
-        String stringHTML = "";
+        String fileName = storyName.concat(".json");
 
         try {
-            InputStream is = getAssets().open("historias/"+fileName, AssetManager.ACCESS_BUFFER);
+            BufferedReader br = new BufferedReader(new InputStreamReader(getAssets().open("historias/"+fileName, AssetManager.ACCESS_BUFFER), StandardCharsets.UTF_8));
 
-            stringHTML = StreamToString(is);
+            JSONParser jsonp = new JSONParser();
 
-            is.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            JSONObject jsono = (JSONObject) jsonp.parse(br);
 
-        if (stringHTML.equals("")) {
-            Toast.makeText(StoryActivity.this, "História não existe", Toast.LENGTH_SHORT).show();
-            finish();
-        } else {
-            Document htmlDocument = Jsoup.parse(stringHTML);
+            JSONArray jsona = (JSONArray) jsono.get("passages");
 
-            Elements storyDataElements = htmlDocument.getElementsByTag("tw-storydata");
+            for (int i = 0; i < jsona.size(); i++) {
+                Passage pass =  new Passage((JSONObject) jsona.get(i));
 
-            if (storyDataElements.size() != 1) {
-                Toast.makeText(StoryActivity.this, "Algo está errado.", Toast.LENGTH_SHORT).show();
-            } else {
-                Element htmlStory = storyDataElements.get(0);
+                story.add(pass);
 
-                Elements htmlPassageData = htmlStory.getElementsByTag("tw-passagedata");
-
-                for (Element passageDataElement : htmlPassageData) {
-                    Passage passage = new Passage(passageDataElement);
-                    story.add(passage);
-
-                    if(passage.getId() == 0) {
-                        storySoFar.add(passage);
-                    }
+                if(pass.getId() == 0) {
+                    storySoFar.add(clone(pass));
                 }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        Log.i("NUM", String.valueOf(storySoFar.size()));
 
         this.setTitle(storyName);
 
@@ -96,25 +87,46 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View view) {
 
-        Button clicked = (Button) view;
+        CardView cv = (CardView) view.getParent().getParent().getParent();
 
+        Button clicked = (Button) view;
         int id = ((Integer)view.getTag()).intValue();
 
         clicked.setTextColor(getColor(android.R.color.holo_red_dark));
         clicked.setBackgroundColor(getColor(R.color.cardBackground));
 
+        clicked.setClickable(false);
+
         LinearLayout buttonLayout = (LinearLayout)clicked.getParent();
 
         for(int i = 0; i < buttonLayout.getChildCount(); i++) {
-            ((Button) buttonLayout.getChildAt(i)).setClickable(false);
+            buttonLayout.getChildAt(i).setClickable(false);
         }
+
+        int passageIndex = cv.getId();
+
+        Passage newPassage = new Passage();
 
         for (int i = 0; i < story.size(); i++) {
             if (story.get(i).getId() == id) {
-                passageAdapter.addPassage(clone(story.get(i)), id);
+                newPassage = clone(story.get(i));
+                newPassage.setCurrent(true);
                 break;
             }
         }
+
+        storySoFar.get(passageIndex).setCurrent(false);
+
+        for (int i = 0; i < storySoFar.get(passageIndex).getLinks().size(); i++) {
+            if (storySoFar.get(passageIndex).getLinks().get(i).getId() == id) {
+                storySoFar.get(passageIndex).getLinks().get(i).setClicked(true);
+            }
+        }
+
+        storySoFar.add(newPassage);
+
+        passageAdapter.updateStory(storySoFar);
+        passageAdapter.notifyDataSetChanged();
     }
 
     public Passage clone(Passage passage) {
@@ -122,7 +134,12 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
 
         cloned.setId(passage.getId());
         cloned.setName(passage.getName());
-        cloned.setText(passage.getText());
+        cloned.setCurrent(passage.isCurrent());
+
+        ArrayList<String> texts = new ArrayList<String>();
+        for (String text : passage.getText()) {
+            cloned.getText().add(text);
+        }
 
         ArrayList<Link> links = new ArrayList<Link>();
         for (Link ink : passage.getLinks()) {
@@ -130,6 +147,7 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
 
             newLink.setId(ink.getId());
             newLink.setText(ink.getText());
+            newLink.setClicked(ink.getClicked());
 
             links.add(newLink);
         }
